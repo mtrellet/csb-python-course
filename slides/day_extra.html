@@ -1,0 +1,420 @@
+<ddoctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>CSB Python Course - Special issue</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				
+				<section>
+					<h1>Python Course</h1>
+					<h3>Computational Structural Biology Group<br><a href="http://www.bonvinlab.org/">BonvinLab</a></h3>
+					<p>
+						<small><a href="https://github.com/brianjimenez" target="_blank">Mikael Trellet</a></small>
+					</p>
+				</section>
+				
+				<section>
+					<h2>Extra day!</h2>
+                    <ol>
+                        <li><a href="#/why">Why should I test my code?</a></li>
+                        <li><a href="#/what">What should I test?</a></li>
+                        <li><a href="#/how">How should I test things?</a></li>
+                        <li><a href="#/ci">How can I be even more efficient?</a></li>
+                    </ol>
+                </section>
+
+                <!-- OOP Section -->
+                <section id="why">
+					<section data-background="#68A0D7">
+						<h2 style="color:white;">1. Why?</h2>
+					</section>
+
+					<section>
+                        <h2>Why should I test my code?</h2>
+                        <p class="fragment">
+                            "Bad programmers have all answers. Good tests have all questions." - <a href="http://www.gilzilberfeld.com/">Gil Zilberfeld</a>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>When should I start worrying about tests?</h2>
+                        <p>
+                            Ideally, from the moment your script will be used beyond your own terminal or more than once it should be tested. Even if simple, adding tests will reduce the chances
+                            a fancy setup another user is using won't break the code, or at least, if it does, it will be nicely reported by the testing pipeline.
+                        </p>
+                    </section>
+                    <section>
+                        <h2>Advantages</h2>
+                        <ol>
+                            <li class="fragment"><b>Code enhancer</b> - forces to think about the result(s) rather than the code itself</li>
+                            <li class="fragment"><b>Time saver</b> - avoids to trace back a bug in a whole project</li>
+                            <li class="fragment"><b>Safer</b> - prevents a significant amount of bugs to pass through the first building phase</li>
+                            <li class="fragment"><b>Auto-informative</b> - complements nicely any documentation</li>
+                        </ol>
+                    </section>
+                </section>
+                <section id="#what">
+                    <section data-background="#68A0D7">
+						<h2 style="color:white;">2. What?</h2>
+					</section>
+                    <section>
+                        <h2>Unit tests</h2>
+                            <p>
+                                Checks that a <b>single component</b> operates in the right way. Not only that it runs without errors but that the expected result is returned. Easy to implement.
+                            </p>
+                            <pre><code class="python" data-trim contenteditable>
+>>> assert sum([1, 2, 3]) == 6, "Should be 6"
+>>> assert sum([1, 1, 1]) == 6, "Should be 6"
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+AssertionError: Should be 6
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Integration tests</h2>
+                            <p>
+                                Checks that components play nicely <b>with each other</b>. Usually to obtain a particular result. Implementation difficulty grows with the number of components
+                            </p>
+                        <pre><code class="python" data-trim contenteditable>
+def test_useless_operation(numbers):
+    assert sum(numbers) + mean(numbers) == 9, "Should be 9"
+
+if __name__ == "__main__":
+    test_useless_operation()
+    print("Everything passed")
+                        </code></pre>
+                        <pre><code class="sh" data-trim contenteditable>
+$ python test_sum.py
+Everything passed
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Functional tests</h2>
+                            <ul>
+                                <li class="fragment fade-in-then-semi-out"><b>Unit test: </b>Checks that a single component ...<></li>
+                                <li class="fragment fade-in-then-semi-out"><b>Integration test: </b>Checks that components play nicely with each other.</li>
+                                <li class="fragment"><b>Functional test: </b>Checks that's an entire program run from end to end without issues. </li>
+                            </ul>
+                    </section>
+
+                    <section>
+                        <h2>Arrays</h2>
+                        <p>
+                            In NumPy, array dimensions are called <b>axis</b> and the total number of axes, <b>rank</b>.
+                        </p>
+                        <p>
+                            <em>array</em> is an alias of the <em>numpy.ndarray</em> object.
+                            <br>
+                        </p>
+                        <p>
+                            <ul>
+                                <li>ndarray.ndim: #axis of the array object (matrix)</li>
+                                <li>ndarray.shape: Tuple of dimensions of the array</li>
+                                <li>ndarray.size: Total number of elements</li>
+                            </ul>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>Example:</h2>
+                        <pre><code class="python" data-trim contenteditable>
+p = np.array([1, 2, 3, 4, 5])
+>>> p
+array([1, 2, 3, 4, 5])
+>>> p.ndim
+1
+>>> p.shape
+(5,)
+>>> p.size
+5
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Matrices</h2>
+                        <pre><code class="python" data-trim contenteditable>
+import numpy as np
+
+>>> a = np.arange(3*2)
+>>> a
+array([0, 1, 2, 3, 4, 5])
+>>> a = a.reshape(3,2)
+>>> a
+array([[0, 1],
+       [2, 3],
+       [4, 5]])
+                        </code></pre>
+                        <p>Dimensions, shape and size?</p>
+                    </section>
+
+                    <section>
+                        <h2>Creating new arrays</h2>
+                        <pre><code class="python" data-trim contenteditable>
+>>> z = np.zeros(10)
+>>> z
+array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
+>>> a = np.arange(10, 20)
+>>> a
+array([10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
+>>> b = np.arange(10, 20, 2)
+>>> b
+array([10, 12, 14, 16, 18])
+>>> np.ones(10)
+                        </code></pre>
+                    </section>
+
+
+                    <section>
+                        <h2>Multidimensional arrays</h2>
+                        <pre><code class="python" data-trim contenteditable>
+>>> a = np.array([[1, 2, 3], [4, 5, 6]])
+>>> a
+array([[1, 2, 3],
+       [4, 5, 6]])
+>>> z = np.zeros(27)
+>>> z.reshape(3,3,3)
+array([[[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]],
+
+       [[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]],
+
+       [[0., 0., 0.],
+        [0., 0., 0.],
+        [0., 0., 0.]]])
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Matrix operations</h2>
+                        <pre><code class="python" data-trim contenteditable>
+a = np.array([[1,0], [0,1]])
+b = np.array([[1,2], [3,4]])
+>>> a+b
+array([[2, 2],
+       [3, 5]])
+>>> a*b
+array([[1, 0],
+       [0, 4]])
+>>> a.dot(b)
+array([[1, 2],
+       [3, 4]])
+>>> a**2
+array([[1, 0],
+       [0, 1]])
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Slicing</h2>
+                        <pre><code class="python" data-trim contenteditable>
+a = np.arange(10)
+>>> a[2:5]
+array([2, 3, 4])
+>>> a[2:]
+array([2, 3, 4, 5, 6, 7, 8, 9])
+>>> a[:-8]
+array([0, 1])
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Slicing (II)</h2>
+                        <pre><code class="python" data-trim contenteditable>
+>>> a = np.arange(18).reshape(6,3)
+>>> a
+array([[ 0,  1,  2],
+       [ 3,  4,  5],
+       [ 6,  7,  8],
+       [ 9, 10, 11],
+       [12, 13, 14],
+       [15, 16, 17]])
+>>> a[:5]
+array([[ 0,  1,  2],
+       [ 3,  4,  5],
+       [ 6,  7,  8],
+       [ 9, 10, 11],
+       [12, 13, 14]])
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Operator "..."</h2>
+                        <pre><code class="python" data-trim contenteditable>
+>>> a = np.arange(18).reshape(6,3)
+array([[ 0,  1,  2],
+       [ 3,  4,  5],
+       [ 6,  7,  8],
+       [ 9, 10, 11],
+       [12, 13, 14],
+       [15, 16, 17]])
+>>> a[...] = 0  # Equivalent to a[::]=0
+>>> a
+array([[0, 0, 0],
+       [0, 0, 0],
+       [0, 0, 0],
+       [0, 0, 0],
+       [0, 0, 0],
+       [0, 0, 0]])
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Assigning values</h2>
+                        <pre><code class="python" data-trim contenteditable>
+>>> a = np.arange(18).reshape(6,3)
+>>> a
+array([[ 0,  1,  2],
+       [ 3,  4,  5],
+       [ 6,  7,  8],
+       [ 9, 10, 11],
+       [12, 13, 14],
+       [15, 16, 17]])
+>>> a[:,0:2] = 1
+>>> a
+array([[ 1,  1,  2],
+       [ 1,  1,  5],
+       [ 1,  1,  8],
+       [ 1,  1, 11],
+       [ 1,  1, 14],
+       [ 1,  1, 17]])
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Exercises</h2>
+                        <p>
+                            <a href="../code/day_3/numpy_exercises.ipynb">NumPy Notebook</a>
+                        </p>
+                    </section>
+
+                </section>
+
+				<!-- Matplotlib Section -->
+               	<section id="matplotlib">
+					<section data-background="#1D4972">
+						<h2 style="color:white;">2. Matplotlib</h2>
+					</section>
+
+                    <section>
+                        <h2>Library structure</h2>
+                        <p>
+                            Matplotlib code is divided in three different parts:
+                            <ul>
+                                <li><em>backend</em>: the system dependent part (file outputs, window manager, etc.)</li>
+                                <li>Maplotlib API: base code</li>
+                                <li><em>pyplot</em>: procedural interface similar to Matlab and OpenGL</li>
+                            </ul>
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>pyplot</h2>
+                        <p>
+                            <em>pyplot</em> relies on global state and a flat namespace. 
+                        </p>
+                        <p>
+                            It is OK for small applications, but when complexity raises, OO code is preferred.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>Simple example</h2>
+                        <pre><code class="python" data-trim contenteditable>
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.arange(0, 10, 0.2)
+y = np.sin(x)
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.plot(x, y)
+plt.show()
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>More examples</h2>
+                        <p>
+                            <a href="../code/day_3/matplotlib.ipynb">Matplotlib Notebook</a>
+                        </p>
+                    </section>
+
+				</section>
+
+                <!-- Bokeh Section -->
+                <section id="bokeh">
+                    <section data-background="#007f00">
+                        <h2 style="color:white;">3. Bokeh</h2>
+                    </section>
+
+                    <section>
+                        <h2>Spirit</h2>
+                        <p>
+                            Bokeh is an interactive visualization library that targets modern web browsers for presentation. It builds on top of other libraries such as matplotlib and pandas.
+                        </p>
+                        <br>
+                        <p>
+                            <a href="https://nestor.science.uu.nl/haddock2.4/">Haddock 2.4</a> interactive plots use this technology.
+                        </p>
+                    </section>
+
+                    <section>
+                        <h2>Simple examples</h2>
+                        <p>
+                            <a href="../code/day_3/bokeh.ipynb">Bokeh Notebook</a>
+                        </p>
+                    </section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                slideNumber: true, 
+                slideNumber: 'c/t',
+                showSlideNumber: 'all',
+                transition: 'slide',
+
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
