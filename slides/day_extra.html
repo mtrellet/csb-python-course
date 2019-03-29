@@ -74,7 +74,7 @@
                     </section>
                 </section>
                 <section id="#what">
-                    <section data-background="#68A0D7">
+                    <section data-background="#FFA500">
 						<h2 style="color:white;">2. What?</h2>
 					</section>
                     <section>
@@ -97,236 +97,60 @@ AssertionError: Should be 6
                             </p>
                         <pre><code class="python" data-trim contenteditable>
 def test_useless_operation(numbers):
-    assert sum(numbers) + mean(numbers) == 9, "Should be 9"
+    assert sum(numbers) + max(numbers) == 9, "Should be 9"
 
 if __name__ == "__main__":
-    test_useless_operation()
+    test_useless_operation([1, 2, 3])
     print("Everything passed")
                         </code></pre>
-                        <pre><code class="sh" data-trim contenteditable>
+                        <pre><code class="hljs" data-trim contenteditable>
 $ python test_sum.py
 Everything passed
                         </code></pre>
                     </section>
                     <section>
+                        <h2>Assertion Error</h2>
+                        <pre><code class="python" data-trim contenteditable>
+def test_useless_operation(numbers):
+    assert sum(numbers) + max(numbers) == 9, "Should be 9"
+
+if __name__ == "__main__":
+    test_useless_operation([5, 6, 7])
+    print("Everything passed")
+                        </code></pre>
+                        <pre class="hljs"><code data-trim contenteditable>
+$ python test_operation.py
+Traceback (most recent call last):
+  File "test_operation.py", line 8, in &lt;module&gt;
+    test_useless_operation([5, 6, 7])
+  File "test_operation.py", line 4, in test_useless_operation
+    assert sum(numbers) + max(numbers) == 9, "Should be 9"
+AssertionError: Should be 9
+                        </code></pre>
+                    </section>
+                    <section>
                         <h2>Functional tests</h2>
                             <ul>
-                                <li class="fragment fade-in-then-semi-out"><b>Unit test: </b>Checks that a single component ...<></li>
-                                <li class="fragment fade-in-then-semi-out"><b>Integration test: </b>Checks that components play nicely with each other.</li>
-                                <li class="fragment"><b>Functional test: </b>Checks that's an entire program run from end to end without issues. </li>
+                                Checks that an entire program run from end to end without issues. Difficulty depends on
+                                <ol>
+                                    <li>Number of components</li>
+                                    <li>Mode of interaction with the program (GUI, CLI, etc.)</li>
+                                    <li>Number of possible scenarios</li>
+                                </ol>
                             </ul>
                     </section>
-
-                    <section>
-                        <h2>Arrays</h2>
-                        <p>
-                            In NumPy, array dimensions are called <b>axis</b> and the total number of axes, <b>rank</b>.
-                        </p>
-                        <p>
-                            <em>array</em> is an alias of the <em>numpy.ndarray</em> object.
-                            <br>
-                        </p>
-                        <p>
-                            <ul>
-                                <li>ndarray.ndim: #axis of the array object (matrix)</li>
-                                <li>ndarray.shape: Tuple of dimensions of the array</li>
-                                <li>ndarray.size: Total number of elements</li>
-                            </ul>
-                        </p>
-                    </section>
-
-                    <section>
-                        <h2>Example:</h2>
-                        <pre><code class="python" data-trim contenteditable>
-p = np.array([1, 2, 3, 4, 5])
->>> p
-array([1, 2, 3, 4, 5])
->>> p.ndim
-1
->>> p.shape
-(5,)
->>> p.size
-5
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <h2>Matrices</h2>
-                        <pre><code class="python" data-trim contenteditable>
-import numpy as np
-
->>> a = np.arange(3*2)
->>> a
-array([0, 1, 2, 3, 4, 5])
->>> a = a.reshape(3,2)
->>> a
-array([[0, 1],
-       [2, 3],
-       [4, 5]])
-                        </code></pre>
-                        <p>Dimensions, shape and size?</p>
-                    </section>
-
-                    <section>
-                        <h2>Creating new arrays</h2>
-                        <pre><code class="python" data-trim contenteditable>
->>> z = np.zeros(10)
->>> z
-array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0.])
->>> a = np.arange(10, 20)
->>> a
-array([10, 11, 12, 13, 14, 15, 16, 17, 18, 19])
->>> b = np.arange(10, 20, 2)
->>> b
-array([10, 12, 14, 16, 18])
->>> np.ones(10)
-                        </code></pre>
-                    </section>
-
-
-                    <section>
-                        <h2>Multidimensional arrays</h2>
-                        <pre><code class="python" data-trim contenteditable>
->>> a = np.array([[1, 2, 3], [4, 5, 6]])
->>> a
-array([[1, 2, 3],
-       [4, 5, 6]])
->>> z = np.zeros(27)
->>> z.reshape(3,3,3)
-array([[[0., 0., 0.],
-        [0., 0., 0.],
-        [0., 0., 0.]],
-
-       [[0., 0., 0.],
-        [0., 0., 0.],
-        [0., 0., 0.]],
-
-       [[0., 0., 0.],
-        [0., 0., 0.],
-        [0., 0., 0.]]])
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <h2>Matrix operations</h2>
-                        <pre><code class="python" data-trim contenteditable>
-a = np.array([[1,0], [0,1]])
-b = np.array([[1,2], [3,4]])
->>> a+b
-array([[2, 2],
-       [3, 5]])
->>> a*b
-array([[1, 0],
-       [0, 4]])
->>> a.dot(b)
-array([[1, 2],
-       [3, 4]])
->>> a**2
-array([[1, 0],
-       [0, 1]])
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <h2>Slicing</h2>
-                        <pre><code class="python" data-trim contenteditable>
-a = np.arange(10)
->>> a[2:5]
-array([2, 3, 4])
->>> a[2:]
-array([2, 3, 4, 5, 6, 7, 8, 9])
->>> a[:-8]
-array([0, 1])
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <h2>Slicing (II)</h2>
-                        <pre><code class="python" data-trim contenteditable>
->>> a = np.arange(18).reshape(6,3)
->>> a
-array([[ 0,  1,  2],
-       [ 3,  4,  5],
-       [ 6,  7,  8],
-       [ 9, 10, 11],
-       [12, 13, 14],
-       [15, 16, 17]])
->>> a[:5]
-array([[ 0,  1,  2],
-       [ 3,  4,  5],
-       [ 6,  7,  8],
-       [ 9, 10, 11],
-       [12, 13, 14]])
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <h2>Operator "..."</h2>
-                        <pre><code class="python" data-trim contenteditable>
->>> a = np.arange(18).reshape(6,3)
-array([[ 0,  1,  2],
-       [ 3,  4,  5],
-       [ 6,  7,  8],
-       [ 9, 10, 11],
-       [12, 13, 14],
-       [15, 16, 17]])
->>> a[...] = 0  # Equivalent to a[::]=0
->>> a
-array([[0, 0, 0],
-       [0, 0, 0],
-       [0, 0, 0],
-       [0, 0, 0],
-       [0, 0, 0],
-       [0, 0, 0]])
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <h2>Assigning values</h2>
-                        <pre><code class="python" data-trim contenteditable>
->>> a = np.arange(18).reshape(6,3)
->>> a
-array([[ 0,  1,  2],
-       [ 3,  4,  5],
-       [ 6,  7,  8],
-       [ 9, 10, 11],
-       [12, 13, 14],
-       [15, 16, 17]])
->>> a[:,0:2] = 1
->>> a
-array([[ 1,  1,  2],
-       [ 1,  1,  5],
-       [ 1,  1,  8],
-       [ 1,  1, 11],
-       [ 1,  1, 14],
-       [ 1,  1, 17]])
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <h2>Exercises</h2>
-                        <p>
-                            <a href="../code/day_3/numpy_exercises.ipynb">NumPy Notebook</a>
-                        </p>
-                    </section>
-
                 </section>
 
 				<!-- Matplotlib Section -->
-               	<section id="matplotlib">
+               	<section id="#how">
 					<section data-background="#1D4972">
-						<h2 style="color:white;">2. Matplotlib</h2>
+						<h2 style="color:white;">3. How?</h2>
 					</section>
 
                     <section>
-                        <h2>Library structure</h2>
+                        <h2>Manual testing - :-(</h2>
                         <p>
-                            Matplotlib code is divided in three different parts:
-                            <ul>
-                                <li><em>backend</em>: the system dependent part (file outputs, window manager, etc.)</li>
-                                <li>Maplotlib API: base code</li>
-                                <li><em>pyplot</em>: procedural interface similar to Matlab and OpenGL</li>
-                            </ul>
+                            Running each test by hand when a new feature is added or a bug is fixed
                         </p>
                     </section>
 
@@ -356,10 +180,23 @@ plt.show()
                     </section>
 
                     <section>
-                        <h2>More examples</h2>
-                        <p>
-                            <a href="../code/day_3/matplotlib.ipynb">Matplotlib Notebook</a>
-                        </p>
+                        <h2>Practical</h2>
+                            <pre><code class="python" data-trim contenteditable>import unittest
+from random import randrange
+from .jurassic_park import Dinosaur, Triceratops, TyrannosaurusRex
+
+class TestJurassicPark(unittest.TestCase):
+
+    def test_new_dino(self):
+        dino = Dinosaur(100)
+        self.assertEqual(dino.size, 100)
+        self.assertNotEqual(dino.size, 200)
+
+    def test_new_triceratops(self):
+        triceratops = Triceratops(randrange(5, 15))
+        self.assertTrue(5 <= triceratops.size <= 15)
+        self.assertEqual(triceratops.roar(), 'buff! buff!')
+                            </code></pre>
                     </section>
 
 				</section>
