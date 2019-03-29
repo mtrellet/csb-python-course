@@ -154,14 +154,17 @@ AssertionError: Should be 9
                     </section>
                     <section>
                         <h2>Functional tests</h2>
-                            <ul>
-                                Checks that an entire program run from end to end without issues. Difficulty depends on
+                            <p>
+                                Checks that an entire program run from end to end without issues.
+                            </p>
+                            <p>
+                                Difficulty depends on:
                                 <ol>
                                     <li>Number of components</li>
                                     <li>Mode of interaction with the program (GUI, CLI, etc.)</li>
                                     <li>Number of possible scenarios</li>
                                 </ol>
-                            </ul>
+                            </p>
                     </section>
                 </section>
 
@@ -171,7 +174,7 @@ AssertionError: Should be 9
 					</section>
 
                     <section>
-                        <h2>Manual testing - :-(</h2>
+                        <h2>Manual testing :-(</h2>
                         <p>
                             Running each test by hand when a new feature is added or a bug is fixed
                         </p>
@@ -471,6 +474,36 @@ class Haddock24AppCase(unittest.TestCase):
             response = client.get('/haddock2.4/')
             self.assertEqual(response.status_code, 200)
 
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Running tests locally</h2>
+                        <p>
+                            We can anticipate test failures by running some tests locally. This avoids to wait for a PR
+                            to be tested before spotting an issue.
+                        </p>
+                        <pre><code>
+#!/usr/bin/env bash
+
+echo "STARTING TESTS"
+
+# Check that nothing is running
+docker-compose -p ci_test down
+# Run postgres
+docker-compose -p ci_test up -d postgres
+# Create temporary DB
+docker-compose -p ci_test exec -u postgres -T postgres createdb test_db
+# Run haddock2.4 local tests
+docker-compose -p ci_test run local_test nosetests -x --logging-filter=stdout --logging-clear-handlers -w app/haddock24/tests
+# Delete the test DB
+docker-compose -p ci_test exec -u postgres -T postgres dropdb test_db
+# Turn off running containers
+docker-compose -p ci_test down
+# Clean exited containers
+docker-compose -p ci_test rm -f
+
+echo "TEST FINISHED"
                         </code></pre>
                     </section>
 
