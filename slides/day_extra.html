@@ -76,21 +76,23 @@
                     <section>
                         <h2>When should I start worrying about tests?</h2>
                         <p>
-                            Ideally, from the moment your script will be used beyond your own terminal or more than once it should be tested. Even if simple, adding tests will reduce the chances
-                            a fancy setup another user is using won't break the code, or at least, if it does, it will be nicely reported by the testing pipeline.
+                            Ideally, from the moment your script will be used beyond your own terminal or more than once it should be tested.
+                            Even if simple, adding tests will reduce the chances a tiny change solving one issue triggers ten others somewhere else or
+                            that a fancy setup another user is using will break the code, etc.
+                            Testing does not solve bugs but it helps exposing them! Unlike your agenda, user creativity has no limit!
                         </p>
                     </section>
                     <section>
                         <h2>Advantages</h2>
                         <ol>
-                            <li class="fragment"><b>Code enhancer</b> - forces to think about the result(s) rather than the code itself</li>
                             <li class="fragment"><b>Time saver</b> - avoids to trace back a bug in a whole project</li>
                             <li class="fragment"><b>Safer</b> - prevents a significant amount of bugs to pass through the first building phase</li>
+                            <li class="fragment"><b>Code enhancer</b> - forces to think about the result(s) rather than the code itself</li>
                             <li class="fragment"><b>Auto-informative</b> - complements nicely any documentation</li>
                         </ol>
                     </section>
                 </section>
-                <section id="#what">
+                <section id="what">
                     <section data-background="#FFA500">
 						<h2 style="color:white;">2. What?</h2>
 					</section>
@@ -163,8 +165,7 @@ AssertionError: Should be 9
                     </section>
                 </section>
 
-				<!-- Matplotlib Section -->
-               	<section id="#how">
+				<section id="how">
 					<section data-background="#1D4972">
 						<h2 style="color:white;">3. How?</h2>
 					</section>
@@ -342,7 +343,7 @@ class TestJurassicPark(unittest.TestCase):
 				</section>
 
                 <!-- Bokeh Section -->
-                <section id="#ci">
+                <section id="ci">
                     <section data-background="#007f00">
                         <h2 style="color:white;">4. Continuous Integration(/Deployment/...)</h2>
                     </section>
