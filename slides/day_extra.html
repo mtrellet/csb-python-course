@@ -31,6 +31,9 @@
           .reveal ol {
             display: block;
           }
+          .reveal pre {
+            font-size: 0.45em;
+          }
         </style>
 
 	</head>
@@ -227,9 +230,96 @@ Ran 3 tests in 0.001s
 FAILED (failures=1)
                         </code></pre>
                     </section>
+                    <section>
+                        <h2>unittest output</h2>
+                        <pre style="font-size: 0.55em"><code>$ python test_operation.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>nose / nose2</h2>
+                        <p>Brings on top of unittest:</p>
+                        <ul>
+                            <li>Automatic discovery of tests</li>
+                            <li>Coverage analysis</li>
+                            <li>Stop at first failure</li>
+                            <li>Filter output</li>
+                            <li>...</li>
+                        </ul>
+                        <pre class="fragment"><code class="python" data-trim contenteditable>
+import unittest
+
+class TestOperation(unittest.TestCase):
+
+    def test_useless_operation(self):
+        self.assertEqual(sum([1, 3, 2]) + max([1, 4, 2]), 9, "Should be 9")
+
+# if __name__ == "__main__":
+#     unittest.main()
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Nose output</h2>
+                        <pre><code>$ nosetests test_operation.py
+..F
+======================================================================
+FAIL: test_useless_operation (test_operation.TestOperation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/mtrellet/Dev/csb-python-course/code/day_extra/test_operation.py", line 13, in test_useless_operation
+    self.assertEqual(sum([1, 3, 2]) + max([1, 4, 2]), 9, "Should be 9")
+AssertionError: 10 != 9 : Should be 9
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (failures=1)
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>pytest</h2>
+                        <p>Main differences with nose:</p>
+                        <ul>
+                            <li>Does not wrap over unittest</li>
+                            <li>Allows for native <i>assert</i> tests</li>
+                            <li>Support for filtering for test cases</li>
+                            <li>Ability to rerun from last failing test</li>
+                            <li>Many plugins</li>
+                        </ul>
+                    </section>
 
                     <section>
                         <h2>Practical</h2>
+                        To test:<a href="../code/day_extra/jurassic_park.py"> <i>jurassic_park.py</i></a><br>
+                        <pre><code class="python" data-trim contenteditable>
+from random import randrange
+
+class Dinosaur(object):
+    def __init__(self, size):
+        self.size = size
+
+    def roar(self):
+        raise NotImplementedError
+
+class TyrannosaurusRex(Dinosaur):
+    def __init__(self, size):
+        super().__init__(size)
+        self.name = 'Tyrannosaurus Rex'
+
+    def roar(self):
+        return 'WROOOooooOOaaarrr!'
+...
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Practical</h2>
+                        <a href="../code/day_extra/test_jurassic_park.py">Test suite to extend</a>
                             <pre><code class="python" data-trim contenteditable>import unittest
 from random import randrange
 from .jurassic_park import Dinosaur, Triceratops, TyrannosaurusRex
@@ -253,27 +343,38 @@ class TestJurassicPark(unittest.TestCase):
                 <!-- Bokeh Section -->
                 <section id="bokeh">
                     <section data-background="#007f00">
-                        <h2 style="color:white;">3. Bokeh</h2>
+                        <h2 style="color:white;">4. Continuous Integration(/Deployment/...)</h2>
                     </section>
 
                     <section>
-                        <h2>Spirit</h2>
+                        <h2>DevOps culture for software development</h2>
                         <p>
-                            Bokeh is an interactive visualization library that targets modern web browsers for presentation. It builds on top of other libraries such as matplotlib and pandas.
+                            "... a software engineering culture and practice that aims at unifying software development (Dev)
+                            and software operation (Ops). The main characteristic of the DevOps movement is to strongly
+                            advocate automation and monitoring at all steps of software construction, from integration, testing, releasing to deployment ..." - <a href="https://en.wikiversity.org/wiki/DevOps">Wikiversity</a>
                         </p>
-                        <br>
-                        <p>
-                            <a href="https://nestor.science.uu.nl/haddock2.4/">Haddock 2.4</a> interactive plots use this technology.
-                        </p>
+                    </section>
+                    <section>
+                        <h2>DevOps cycle</h2>
+                        <img data-src="../media/devops.png">
                     </section>
 
                     <section>
-                        <h2>Simple examples</h2>
-                        <p>
-                            <a href="../code/day_3/bokeh.ipynb">Bokeh Notebook</a>
-                        </p>
+                        <h3>Continuous continuum</h3>
+                        <ul>
+                            <li><b>Continuous Integration (CI)</b><br> Code merged in repository ⇒ Automated builds and code tests performed</li>
+                            <li class="fragment"> <b>Continuous Delivery (CD)</b><br> Deploy in testing environments and performs integration tests</li>
+                            <li class="fragment"> <b>Continuous Deployment (CD’)</b><br> Deploy to production environment (e.g. as a stable release)</li>
+                        </ul>
                     </section>
-
+                    <section>
+                        <h2>DevOps cycle</h2>
+                        <img data-src="../media/continuous_integration.png">
+                    </section>
+                    <section>
+                        <h2>HADDOCK case</h2>
+                        <img data-src="../media/haddock_cd.png">
+                    </section>
 			</div>
 		</div>
 
