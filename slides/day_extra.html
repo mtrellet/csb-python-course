@@ -44,18 +44,19 @@
 				<section>
 					<h1>Python Course</h1>
 					<h3>Computational Structural Biology Group<br><a href="http://www.bonvinlab.org/">BonvinLab</a></h3>
-					<p>
-						<small><a href="https://github.com/brianjimenez" target="_blank">Mikael Trellet</a></small>
+					<p style="text-align: center">
+						<small><a href="https://github.com/mtrellet" target="_blank">Mikael Trellet</a></small>
 					</p>
 				</section>
 				
 				<section>
 					<h2>Extra day!</h2>
+                    <a href="https://mtrellet.github.io/csb-python-course/slides/day_extra.html">https://mtrellet.github.io/csb-python-course/slides/day_extra.html</a><br><br>
                     <ol>
                         <li><a href="#/why">Why should I test my code?</a></li>
                         <li><a href="#/what">What should I test?</a></li>
                         <li><a href="#/how">How should I test things?</a></li>
-                        <li><a href="#/ci">How can I be even more efficient?</a></li>
+                        <li><a href="#/ci">What about HADDOCK?</a></li>
                     </ol>
                 </section>
 
@@ -341,7 +342,7 @@ class TestJurassicPark(unittest.TestCase):
 				</section>
 
                 <!-- Bokeh Section -->
-                <section id="bokeh">
+                <section id="#ci">
                     <section data-background="#007f00">
                         <h2 style="color:white;">4. Continuous Integration(/Deployment/...)</h2>
                     </section>
@@ -374,6 +375,117 @@ class TestJurassicPark(unittest.TestCase):
                     <section>
                         <h2>HADDOCK case</h2>
                         <img data-src="../media/haddock_cd.png">
+                    </section>
+                    <section>
+                        <h2>LIVE DEMO - Github + Jenkins</h2>
+                    </section>
+                    <section>
+                        <h3>test_app.py</h3>
+                        <pre><code class="python" data-trim contenteditable>
+import json
+import shutil
+import unittest
+import sys
+import os
+from os.path import join
+
+# Change working directory to the main CSB app one (mimic standard setup)
+os.chdir(os.path.abspath(join(os.path.dirname(__file__), '../../..')))
+sys.path.insert(0, os.path.abspath(os.curdir))
+
+from app.models.user import User
+from app.models.service import Service
+from app import create_app, db, register_service
+from flask import current_app, request
+
+class Haddock24AppCase(unittest.TestCase):
+...
+
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>test_app.py (2)</h3>
+                        <pre><code class="python" data-trim contenteditable>
+    def setUp(self):
+        #: Flask app created in testing mode
+        self.app = create_app('testing')
+        self.app.testing = True
+        # In testing mode we prefer to disable csrf protection to facilitate the tests
+        self.app.config['WTF_CSRF_ENABLED'] = False
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        db.create_all()
+        self.add_service()
+        # Import HADDOCK specific configuration
+        from app.haddock24.config import HaddockConfig
+        self.app.config.from_object(HaddockConfig)
+        #: Example directory path
+        self.examples_dir = 'app/haddock24/tests/haddock-examples/'
+        #: Display diff
+        self.maxDiff = None
+
+    def tearDown(self):
+        # Clean temporary directories
+        user = User.query.filter_by(email='robin.hobb@example.com').first()
+        if user:
+            user_id = user.haddock_id
+            if os.path.exists(join(current_app.config['PROCESS_DIRECTORY'], str(user_id))):
+                shutil.rmtree(join(current_app.config['PROCESS_DIRECTORY'], str(user_id)))
+            if os.path.exists(join(current_app.config['RESULTS_DIRECTORY'], str(user_id))):
+                shutil.rmtree(join(current_app.config['RESULTS_DIRECTORY'], str(user_id)))
+            for tmp_dir in os.listdir(current_app.config['TEMP_DIRECTORY']):
+                shutil.rmtree(join(current_app.config['TEMP_DIRECTORY'], tmp_dir))
+        db.session.remove()
+        db.drop_all()
+        self.app_context.pop()
+
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h3>test_app.py (3)</h3>
+                        <pre><code class="python" data-trim contenteditable>
+    def test_app_exists(self):
+        """
+        Check that the application has been created
+        """
+        self.assertFalse(current_app is None)
+        def test_app_is_testing(self):
+        """
+        Check that the Flask application is in TESTING mode
+        """
+        self.assertTrue(current_app.config['TESTING'])
+
+    def test_app_config(self):
+        ...
+
+    def test_home_page(self):
+        """
+        Check that the HADDOCK2.4 home page is accessible
+        """
+        with self.app.test_client() as client:
+            response = client.get('/haddock2.4')
+            self.assertEqual(response.status_code, 301)
+            response = client.get('/haddock2.4', follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            response = client.get('/haddock2.4/')
+            self.assertEqual(response.status_code, 200)
+
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Resources</h2>
+                        <ul>
+                            <li><a href="https://realpython.com/python-testing/">https://realpython.com/python-testing/</a></li>
+                            <li><a href="https://github.com/mtrellet/haddock_param_tools">https://github.com/mtrellet/haddock_param_tools</a>
+                                <br>Repository with scripts/API to manipulate new haddock parameter files</li>
+                            <li><a href="https://travis-ci.com/mtrellet/haddock_param_tools">https://travis-ci.com/mtrellet/haddock_param_tools</a></li>
+                            <li><a href="http://alembick.science.uu.nl:8080/">http://alembick.science.uu.nl:8080/</a><br> Jenkins server</li>
+
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Questions</h2>
                     </section>
 			</div>
 		</div>
