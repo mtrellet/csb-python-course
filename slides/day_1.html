@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>CSB Python Course - Day 1</title>
+		<title>FLUIGENT Python Course - Day 1</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/white.css">
@@ -29,7 +29,7 @@
 					<h1>Python Course</h1>
 					<h3>Computational Structural Biology Group<br><a href="http://www.bonvinlab.org/">BonvinLab</a></h3>
 					<p>
-						<small><a href="https://github.com/brianjimenez" target="_blank">Brian Jimenez</a></small>
+						<small><a href="https://github.com/mtrellet" target="_blank">Mikael Trellet</a></small>
 					</p>
 				</section>
 				
@@ -56,16 +56,14 @@
 
 					<section>
 						<h2>"History"</h2>
-						<p>Development started by Guido van Rossum (ex-BDFL, <em>Benevolent Dictator for Life</em>) during the 1989 Christimas holiday.<br>February 1991: first public version posted to USENET.</p>
+                        <p>Development started by <b>Guido van Rossum</b> during the 1989 Christimas holiday.</p>
+                        <img height="400" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Guido-portrait-2014-curvves.jpg/1280px-Guido-portrait-2014-curvves.jpg">
                     </section>
                     <section>
-						<h2>"History"</h2>
-                        <p>Monty Python's <em>Flying Circus</em> and the name of the language is not just a coincidence.</p>
-                    </section>
-                    <section>
-                    	<h2>What is a PEP?</h2>
-                        <p>PEP is a <em>Python Enhancement Proposal</em></p>
-                        <a href="https://www.python.org/dev/peps/">PEP-0: Index of Python Enhancement Proposals</a>
+                        <h2>Organised around PEPs</h2>
+                    	<p>PEP is a <em>Python Enhancement Proposal</em></p>
+                        <a href="https://www.python.org/dev/peps/">PEP-0: Index of Python Enhancement Proposals</a><br>
+                        <a href="https://www.python.org/dev/peps/pep-0008/">PEP-8: Style Guide for Python Code</a>
                     </section>
                     <section>
 						<h2>"History"</h2>
@@ -73,6 +71,7 @@
                            <li>Python 2.0 released on 16 October 2000</li>
                            <li>Python 3.0 on 3 December 2008.</li>
                            <li>Python 2.7 End of Life in 2020 (<a href="https://legacy.python.org/dev/peps/pep-0373/">PEP-373</a>).</li>
+                            <img width="300" data-src="../media/python2_gvr_tweet.png" alt="Gydo's tweet">
                            <li>Python 3.8.0 candidate 1: Sunday, 2019-09-29 (<a href="https://www.python.org/dev/peps/pep-0569/">PEP-569</a>).</li>
                         </ul>
 					</section>
@@ -144,7 +143,9 @@ for element in mylist:
                     </section>
                     <section>
                         <h2>Python Package Index</h2>
-                        <p><a href="https://pypi.python.org/pypi" target="_blank">PyPI</a> is the official Python repository for third-party software. It is the correct place to share your python packages with other python users. Same as CPAN in Perl community.</p>
+                        <p><a href="https://pypi.python.org/pypi" target="_blank">PyPI</a> is the official Python repository
+                            for third-party software. It is the correct place to share your python packages with other python users.
+                            Same as CPAN in Perl community.</p>
                         <p>It is maintained by the Python Software Foundation and referenced by the <em>pip</em> command.</p>
                     </section>
                     <section>
@@ -162,67 +163,31 @@ for element in mylist:
                     </section>
 
                     <section>
-                        <h2>Scientific software</h2>
+                        <h2>Associated tools</h2>
                         <p>
                             <ul>
-                                <li><a href="http://pychem.sf.net" target="_blank">PyChem</a></li>
-                                <li><a href="http://www.cgl.ucsf.edu/chimera" target="_blank">UCSF Chimera</a></li>
-                                <li><a href="http://www.salilab.org/modeller" target="_blank">Modeller</a></li>
-                                <li><a href="http://www.pymol.org/" target="_blank">PyMOL</a></li>
-                                <li><a href="https://github.com/haddocking/pdb-tools" target="_blank">PDB-Tools</a></li>
-                                <li><a href="https://nestor.science.uu.nl/haddock2.4/" target="_blank">HADDOCK 2.4</li>
                                 <li><a href="http://ipython.org" target="_blank">IPython</a>: a command shell for Python with browser-based capabilities.</li>
+                                <li><a href="https://www.jetbrains.com/pycharm/" target="_blank">PyCharm</a>: an IDE with many integrated tools, code-checking capabilities, etc.</li>
+                                <li><a href="http://flask.palletsprojects.com/en/1.1.x/" target="_blank">Flask</a>: a Web application framework, used for the intranet for instance</li>
                             </ul>
                         </p>
                     </section>
 
                     <section>
-                        <h2>Python implementations</h2>
-                        <p>CPython is the reference implementation, but not the only one:</p>
+                        <h2>Installation</h2>
+                        <b>Linux and macOS</b>
+                        <p>Shipped with the OS but can be complemented by Anaconda for example</p>
+						<b>Windows</b>
+						<p>
                         <ul>
-                            <li><a href="http://pypy.org" target="_blank">PyPy</a>: versions 2.7.13 and 3.5.3, 3.6. JIT compiler, stackless (threads, no <a href="https://wiki.python.org/moin/GlobalInterpreterLock" target="_blank">GIL</a>)</li>
-                            <li><a href="http://www.jython.org" target="_blank">Jython</a>: Python to Java bytecode</li>
-                            <li><a href="http://www.ironpython.net" target="_blank">IronPython</a>: .NET framework</li>
-                            <li><a href="http://www.stackless.com" target="_blank">StacklessPython</a></li>
+                            <li>Windows store*</li>
+                            <li>Python website*(via installer .exe, .msi)</li>
+                            <li>Visual Studio Installer</li>
+                            <li>Anaconda</li>
                         </ul>
-                    </section>
-                    <section>
-                        <h2>Installing modules</h2>
-                        <p>Ubuntu</p>
-                        <pre><code class="bash" data-trim contenteditable>
-sudo apt-get install python3-numpy
-						</code></pre>
-						<p>macOS / Macports</p>
-						<pre><code class="bash" data-trim contenteditable>
-sudo port install py37-numpy
-						</code></pre>
+                        </p>
                         <br>
-                        <p>*Note this is a system-wide installation. Bad idea? Maybe.</p>
-                    </section>
-
-                    <section>
-                        <h2>Python Distribution Utilities (Distutils)</h2>
-                        <p>You download a python packaged file (<a href="http://peak.telecommunity.com/DevCenter/PythonEggs" target="_blank">python egg</a>) which contains a <em>README.txt</em> and a <em>setup.py</em> files:</p>
-                        <pre><code class="bash" data-trim contenteditable>
-$ python3 setup.py build
-$ python3 setup.py install
-						</code></pre>
-                        <br>
-                        <p>Highly recommended: specify an installation directory via prefix:</p>
-						<pre><code class="bash" data-trim contenteditable>
-python3 setup.py install --prefix=/home/brian/python
-						</code></pre>
-                    </section>
-
-                    <section>
-                        <h2>pip vs easy_install</h2>
-                        <p><em>easy_install</em> was released in 2004, downloads and installs automatically packages (and dependencies) from PyPI. But <em>easy_install</em> does not support the Wheel binary package format while pip does.<br>Furthermore, <em>pip</em> (released in 2008) supports uninstalling packages. <b>You should definetely use pip</b>.</p>
-						<pre><code class="bash" data-trim contenteditable>
-$ pip-3.7 search bio
-biotools                - A bunch of bioinformatics utilities.
-moa                     - Moa - command-line workflows (in bioinformatics)
-...
-						</code></pre>
+                        <p style="font-size: smaller">*Note this is a system-wide installation. Bad idea? <span class="fragment highlight-red">Certainly.</span></p>
                     </section>
 
                     <section>
@@ -251,8 +216,32 @@ $ source bin/activate
 (ENV) $ deactivate
 						</code></pre>
                     </section>
-                </section>
 
+                    <section>
+                        <h2>Handle 3rd party libraries</h2>
+                        <p>PIP (released in 2008) automatically packages (and dependencies) from PyPI. It supports uninstalling packages.</p>
+                        <pre><code class="bash" data-trim contenteditable>
+    $ pip-3.7 search bio
+    biotools                - A bunch of bioinformatics utilities.
+    moa                     - Moa - command-line workflows (in bioinformatics)
+    ...
+    $ pip-3.7 install numpy
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Install 3rd party libraries</h2>
+                        <pre><code class="bash" data-trim contenteditable>
+$ pip-3.7 install numpy
+Collecting pandas
+  Downloading ... (9.2MB)
+Collecting numpy>=1.13.3 (from pandas)
+  Downloading ... (12.8MB)
+Installing collected packages: numpy, six, python-dateutil, pytz, pandas
+Successfully installed numpy-1.17.2 pandas-0.25.1 python-dateutil-2.8.0 pytz-2019.2 six-1.12.0
+                        </code></pre>
+                    </section>
+                </section>
                 <!-- Syntax Section -->
             	<section id="syntax">
                     <section data-background="#4d7e65">
@@ -277,18 +266,6 @@ Hello world
                             <li>Read <a href="http://legacy.python.org/dev/peps/pep-0008/" target="_blank">PEP-8</a></li>
                         </ul>
                     </section>
-
-                    <section>
-                        <h2>Configuring Vim</h2>
-						<pre><code data-trim contenteditable>
-$ cat ~/.vimrc
-set tabstop=4
-set shiftwidth=4
-set expandtab
-syntax on
-set backspace=indent,eol,start
-						</code></pre>
-					</section>
 
                     <section>
                         <h2>More about style</h2>
@@ -712,6 +689,7 @@ def f(a, L=None):
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]

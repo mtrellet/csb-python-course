@@ -1,0 +1,52 @@
+Microfluidics is the science of manipulating and controlling fluids, usually in the range of microliters (10-6)
+to picoliters (10-12), in networks of channels with dimensions from tens to hundreds of micrometers.
+This discipline takes its origins in the early 1990’s and has grown exponentially. It is viewed as an essential tool
+for life science research or in a larger way in biotechnologies.
+
+It is a very attractive technology for both academic researchers and industrial groups since it considerably:
+decrease sample and reagent consumptions
+shortens time of experiments
+reduces the overall costs of applications
+
+Furthermore, through the miniaturization and automation made possible by microfluidics and nanofluidics, one may:
+
+Improve the precision of experiments
+Lower limits of detection
+Run multiple analyses simultaneously
+
+HOW DOES MICROFLUIDICS WORKS?
+Microfluidics deals with very precise fluid control, under small volumes and space, micro meaning one of the following features:
+
+Figure 1: Example of a microfluidic chip with channels thinner than 1 mm
+
+Small volumes (µL, nL, pL, fL)
+Small size (mm, µm)
+Low energy consumption
+
+Active microfluidics refers to fluid handling made by active components as microfluidic pumps or microfluidic valves.
+Microfluidic pumps supply fluids in a continuous way or are used for dosing whereas the microfluidic valves can inject
+precise volumes of sample or buffer.
+
+WHY CHOOSE A MICROFLUIDIC DEVICE INSTEAD A ROBOT?
+Due to the low volumes required, microfluidic technologies represent a promising alternative to conventional laboratory
+techniques. They allow complete laboratory protocols on a single chip of few square centimeters. Figure 2 shows the main
+advantages of using microfluidics instead of conventional laboratory assays for a given experiment (Ultra-high throughput
+ screening of a typical enzyme).
+
+ Microfluidics is often used and described in “lab on a chip” and “organ on a chip” technology. But microfluidics can be
+ applied to a wide range of applications, such as:
+
+Figure 3: Photograph of a high-throughput screening experiment with microfluidics (From A. Marin)
+
+Cosmetics (emulsions & formulations)
+Pharmaceuticals (drug discovery)
+Health (personalized medicine & diagnosis)
+Chemistry (flow synthesis & stoichiometry)
+Biology (cell culture and 3D printing)
+Energy (EOR models plasma confinement)
+
+
+To better appreciate the impact of microfluidics, one can make an analogy with the evolution of the computers.
+In the 60’s, one needed an entire room to run a computer. Since then, every component has been reduced in size and
+laptop products appeared. Now a simple smartphone is more powerful than any computer built before. This has reduced
+prices, and is much more user friendly. It’s the same with microfluidics!
