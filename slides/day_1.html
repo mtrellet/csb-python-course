@@ -26,8 +26,8 @@
 			<div class="slides">
 				
 				<section>
-					<h1>Python Course</h1>
-					<h3>Computational Structural Biology Group<br><a href="http://www.bonvinlab.org/">BonvinLab</a></h3>
+					<h1>Python Course - Day 1</h1>
+					<h3>Fluigent Lab</h3>
 					<p>
 						<small><a href="https://github.com/mtrellet" target="_blank">Mikael Trellet</a></small>
 					</p>
@@ -37,9 +37,8 @@
 					<h2>Day 1</h2>
                     <ol>
                         <li><a href="#/introduction">Introduction</a></li>
-                        <li><a href="#/ecosystem">The ecosystem</a></li>
-                        <li><a href="#/syntax">Python syntax and native data-types</a></li>
-                        <li><a href="#/parsing">Parsing atom data</a></li>
+                        <li><a href="#/ecosystem">Ecosystem</a></li>
+                        <li><a href="#/syntax">Syntax and native data-types</a></li>
                     </ol>
                 </section>
 
@@ -70,9 +69,9 @@
                         <ul>
                            <li>Python 2.0 released on 16 October 2000</li>
                            <li>Python 3.0 on 3 December 2008.</li>
-                           <li>Python 2.7 End of Life in 2020 (<a href="https://legacy.python.org/dev/peps/pep-0373/">PEP-373</a>).</li>
+                           <li>Python 2.7 End of Life on 1/1/2020 (<a href="https://legacy.python.org/dev/peps/pep-0373/">PEP-373</a>).</li>
                             <img width="300" data-src="../media/python2_gvr_tweet.png" alt="Gydo's tweet">
-                           <li>Python 3.8.0 candidate 1: Sunday, 2019-09-29 (<a href="https://www.python.org/dev/peps/pep-0569/">PEP-569</a>).</li>
+                           <li>Python 3.8.0 candidate 1: Sunday, 2019-09-30 (<a href="https://www.python.org/dev/peps/pep-0569/">PEP-569</a>).</li>
                         </ul>
 					</section>
                     <section>
@@ -166,7 +165,7 @@ for element in mylist:
                         <h2>Associated tools</h2>
                         <p>
                             <ul>
-                                <li><a href="http://ipython.org" target="_blank">IPython</a>: a command shell for Python with browser-based capabilities.</li>
+                                <li><a href="https://jupyter.org/" target="_blank">Jupyter</a>: a command shell for Python (and other languages) with browser-based capabilities.</li>
                                 <li><a href="https://www.jetbrains.com/pycharm/" target="_blank">PyCharm</a>: an IDE with many integrated tools, code-checking capabilities, etc.</li>
                                 <li><a href="http://flask.palletsprojects.com/en/1.1.x/" target="_blank">Flask</a>: a Web application framework, used for the intranet for instance</li>
                             </ul>
@@ -186,8 +185,7 @@ for element in mylist:
                             <li>Anaconda</li>
                         </ul>
                         </p>
-                        <br>
-                        <p style="font-size: smaller">*Note this is a system-wide installation. Bad idea? <span class="fragment highlight-red">Certainly.</span></p>
+                        <p style="font-size: smaller; font-style: italic">*Note this is a system-wide installation.</p>
                     </section>
 
                     <section>
@@ -219,20 +217,19 @@ $ source bin/activate
 
                     <section>
                         <h2>Handle 3rd party libraries</h2>
-                        <p>PIP (released in 2008) automatically packages (and dependencies) from PyPI. It supports uninstalling packages.</p>
+                        <p>PIP (released in 2008) automatically install packages (and dependencies) from PyPI. It supports uninstalling packages.</p>
                         <pre><code class="bash" data-trim contenteditable>
     $ pip-3.7 search bio
     biotools                - A bunch of bioinformatics utilities.
     moa                     - Moa - command-line workflows (in bioinformatics)
     ...
-    $ pip-3.7 install numpy
                         </code></pre>
                     </section>
 
                     <section>
                         <h2>Install 3rd party libraries</h2>
                         <pre><code class="bash" data-trim contenteditable>
-$ pip-3.7 install numpy
+$ pip-3.7 install pandas
 Collecting pandas
   Downloading ... (9.2MB)
 Collecting numpy>=1.13.3 (from pandas)
@@ -344,7 +341,7 @@ tripled = '''Three single quotes''', """Three double quotes"""
                     <section>
                     	<h2>Operations on sequence types</h2>
                     	<pre><code class="python" data-trim contenteditable>
->>> planets.append('Mercury')
+>>> planets.append('Pluto')
 >>> print(planets)
 ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter',
 'Saturn', 'Uranus', 'Neptune', 'Pluto']
@@ -363,8 +360,8 @@ tripled = '''Three single quotes''', """Three double quotes"""
                     	<pre><code class="python" data-trim contenteditable>
 >>> planets
 ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn',
-'Uranus', 'Neptune', 'Pluto']
->>> planets.remove('Pluto')
+'Uranus', 'Neptune', 'Pluto is not a planet']
+>>> planets.remove('Pluto is not a planet')
 >>> planets
 ['Mercury', 'Venus', 'Earth', 'Mars',
 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
@@ -385,6 +382,8 @@ tripled = '''Three single quotes''', """Three double quotes"""
 >>> birth_year
 ('Stephen Hawking', 1942)
 >>> birth_year[1] = 1943     # Error!
+...
+TypeError: 'tuple' object does not support item assignment
                     	</code></pre>
                     </section>
 
@@ -395,7 +394,7 @@ tripled = '''Three single quotes''', """Three double quotes"""
 b, a = a, b
 
 # Unpacking
-atom, atom_number, resisdue, chain_id = ['CA', 1, 'ALA', 'A']
+atom, atom_number, residue, chain_id = ['CA', 1, 'ALA', 'A']
 
 zeroes = [0] * 100
 spaces = 100 * " "
@@ -445,15 +444,15 @@ country_codes = {34: 'Spain', 376: 'Andorra',
 
 # By key
 for country_code in country_codes:
-    print(country_code)
+    print(country_code, end=' ')
 
 # By value
 for country in country_codes.values():
-    print(country)
+    print(country, end=' ')
 
 # By both
 for country_code, country in country_codes.items():
-    print(country_code, country)
+    print(country_code, country, end=' ')
 
                         </code></pre>
                     </section>
@@ -500,7 +499,7 @@ import sys
 
 def say(message=''):
     """Says something"""
-    print message
+    print(message)
 
 
 if __name__ == "__main__":
@@ -551,24 +550,8 @@ if __name__ == "__main__":
                     </section>
 
                     <section>
-                        <h2>Functions</h2>
-                        <pre><code class="python" data-trim contenteditable>
-def attacked (monster, survivors=0):
-    print('A {} attacked our village!').format(monster))
-    if survivors:
-        print('Luckily, {} people survived'.format(survivors))
-
->>> attacked('Kraken', 42)
-A Kraken attacked our village!
-Luckily, 42 people survived
->>> attacked('Cthulhu')
-A Cthulhu attacked our village!
-                        </code></pre>
-                    </section>
-
-                    <section>
-                        <h2>Different ways of reading from files</h2>
-                        <pre><code class="python" data-trim contenteditable>
+                        <h2>Reading from files</h2>
+                        <pre><code class="python" data-trim contenteditable style="max-height: 500px">
 # Method 1
 f = open('a_file.txt')
 for line in f:
@@ -660,12 +643,6 @@ def f(a, L=None):
             		</section>
 				</section>
 
-				<!-- Parsing Atom Data Section -->
-               	<section id="parsing">
-					<section data-background="#1D4972">
-						<h2 style="color:white;">4. Parsing Atom Data</h2>
-					</section>
-				</section>
 			</div>
 		</div>
 
